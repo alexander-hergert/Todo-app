@@ -15,10 +15,17 @@ const Styles = styled.header`
 /**************** COMPONENT ******************/
 
 const Header = () => {
+  const handleDarkMode = () => {};
+
   return (
     <Styles>
       <h1>TODO</h1>
-      <input type="image" src="images/icon-moon.svg" alt="icon-moon" />
+      <input
+        type="image"
+        src="images/icon-moon.svg"
+        alt="icon-moon"
+        onClick={handleDarkMode}
+      />
     </Styles>
   );
 };

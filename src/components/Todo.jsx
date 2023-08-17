@@ -53,13 +53,28 @@ const Styles = styled.article`
 /**************** COMPONENT ******************/
 
 const Todo = ({ id, content, isCompleted }) => {
+  const handleCheck = () => {};
+
+  const handleDelete = () => {};
+
   return (
     <Styles>
       <div>
-        <input type="checkbox" name={id} id={id} defaultChecked={isCompleted} />
+        <input
+          type="checkbox"
+          name={id}
+          id={id}
+          defaultChecked={isCompleted}
+          onChange={handleCheck}
+        />
         <p>{content}</p>
       </div>
-      <input type="image" src="images/icon-cross.svg" alt="icon-delete" />
+      <input
+        type="image"
+        src="images/icon-cross.svg"
+        alt="icon-delete"
+        onClick={handleDelete}
+      />
     </Styles>
   );
 };

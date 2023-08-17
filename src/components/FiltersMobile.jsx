@@ -15,16 +15,26 @@ const Styles = styled.section`
 /**************** COMPONENT ******************/
 
 const FiltersMobile = () => {
+  //store change
+  const handleClearCompleted = () => {};
+
+  //not store change
+  const handleFilterAll = () => {};
+
+  const handleFilterActive = () => {};
+
+  const handleFilterCompleted = () => {};
+
   return (
     <Styles>
       <div>
         <p>items left</p>
-        <p>Clear Completed</p>
+        <p onClick={handleClearCompleted}>Clear Completed</p>
       </div>
       <div>
-        <p>All</p>
-        <p>Active</p>
-        <p>Completed</p>
+        <p onClick={handleFilterAll}>All</p>
+        <p onClick={handleFilterActive}>Active</p>
+        <p onClick={handleFilterCompleted}>Completed</p>
       </div>
     </Styles>
   );
