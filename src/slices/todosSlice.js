@@ -12,13 +12,18 @@ const todosSlice = createSlice({
       //return [...state, action.payload];
     },
     checkTodo: (state, action) => {
-      //find todo by id
-      return state.todos.map((todo, index) => {
-        if (todo.id === action.payload) {
+      const id = action.payload;
+      state.forEach((todo) => {
+        if (todo.id === id) {
           //change isCompleted into opposite
           todo.isCompleted = !todo.isCompleted;
         }
       });
+    },
+    removeTodo: (state, action) => {
+      const id = action.payload;
+      const newState = state.filter((todo) => id !== todo.id);
+      return newState;
     },
     clearTodos: (state, action) => {
       state.todos.forEach((todo, index) => {
@@ -58,7 +63,13 @@ const todosSlice = createSlice({
   },
 });
 
-export const { addTodo, removeTodo, updateTodo, clearTodos, getTodos } =
-  todosSlice.actions;
+export const {
+  addTodo,
+  removeTodo,
+  updateTodo,
+  clearTodos,
+  getTodos,
+  checkTodo,
+} = todosSlice.actions;
 
 export default todosSlice;

@@ -1,5 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
+import { useDispatch } from "react-redux";
+import { checkTodo, removeTodo } from "../slices/todosSlice";
 
 /**************** STYLES ******************/
 
@@ -53,9 +55,15 @@ const Styles = styled.article`
 /**************** COMPONENT ******************/
 
 const Todo = ({ id, content, isCompleted }) => {
-  const handleCheck = () => {};
+  const dispatch = useDispatch();
 
-  const handleDelete = () => {};
+  const handleCheck = () => {
+    dispatch(checkTodo(id));
+  };
+
+  const handleDelete = () => {
+    dispatch(removeTodo(id));
+  };
 
   return (
     <Styles>
