@@ -3,7 +3,10 @@ import { styled } from "styled-components";
 
 /**************** STYLES ******************/
 
-const Styles = styled.section``;
+const Styles = styled.section`
+  background-color: white;
+  margin-bottom: 1rem;
+`;
 
 /**************** COMPONENT ******************/
 

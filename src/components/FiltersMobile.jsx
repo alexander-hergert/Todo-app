@@ -6,6 +6,9 @@ import { styled } from "styled-components";
 const Styles = styled.section`
   div {
     display: flex;
+    background-color: white;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
 `;
 

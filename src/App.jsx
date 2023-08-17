@@ -7,7 +7,9 @@ import CreateTodo from "./components/CreateTodo";
 import Todos from "./components/Todos";
 import FiltersMobile from "./components/FiltersMobile";
 
-const Main = styled.main``;
+const Main = styled.main`
+  padding: 2rem;
+`;
 
 function App() {
   return (
