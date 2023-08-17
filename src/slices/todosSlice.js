@@ -8,8 +8,9 @@ const todosSlice = createSlice({
   initialState: initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.todos.push(action.payload);
-    }, //should be fine
+      state.push(action.payload);
+      //return [...state, action.payload];
+    },
     checkTodo: (state, action) => {
       //find todo by id
       return state.todos.map((todo, index) => {
