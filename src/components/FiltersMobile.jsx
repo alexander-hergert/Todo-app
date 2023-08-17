@@ -1,5 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
+import { useDispatch } from "react-redux";
+import { clearTodos } from "../slices/todosSlice";
 
 /**************** STYLES ******************/
 
@@ -15,8 +17,12 @@ const Styles = styled.section`
 /**************** COMPONENT ******************/
 
 const FiltersMobile = () => {
+  const dispatch = useDispatch();
+
   //store change
-  const handleClearCompleted = () => {};
+  const handleClearCompleted = () => {
+    dispatch(clearTodos());
+  };
 
   //not store change
   const handleFilterAll = () => {};

@@ -19,7 +19,6 @@ const Todos = () => {
     const savedTodos = localStorage.getItem("todos");
     if (savedTodos) {
       const parsedTodos = JSON.parse(savedTodos);
-      console.log(parsedTodos);
       dispatch(getTodos(parsedTodos));
     }
   }, []);
