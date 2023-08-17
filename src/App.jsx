@@ -1,7 +1,12 @@
 import React from "react";
+import { Provider } from "react-redux";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <Provider store={store}></Provider>
+    </>
+  );
 }
 
 export default App;
