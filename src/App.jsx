@@ -5,7 +5,6 @@ import store from "./store";
 import Header from "./components/Header";
 import CreateTodo from "./components/CreateTodo";
 import Todos from "./components/Todos";
-import FiltersMobile from "./components/FiltersMobile";
 
 const Main = styled.main`
   padding: 2rem;
@@ -19,7 +18,6 @@ function App() {
         <Main>
           <CreateTodo />
           <Todos />
-          <FiltersMobile />
         </Main>
       </Provider>
     </>
