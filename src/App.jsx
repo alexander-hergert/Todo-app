@@ -8,6 +8,8 @@ import Todos from "./components/Todos";
 
 const Main = styled.main`
   padding: 2rem;
+  position: relative;
+  bottom: 8rem;
 `;
 
 function App() {

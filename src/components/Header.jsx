@@ -4,12 +4,22 @@ import { styled } from "styled-components";
 
 const Styles = styled.header`
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   height: 25vh;
   width: 100%;
   background: url("/images/bg-mobile-light.jpg") center/cover no-repeat;
   padding: 2rem;
+
+  h1 {
+    color: white;
+    letter-spacing: 1rem;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 800px) {
+    background: url("/images/bg-desktop-light.jpg") center/cover no-repeat;
+  }
 `;
 
 /**************** COMPONENT ******************/

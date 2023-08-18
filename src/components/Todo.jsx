@@ -10,7 +10,8 @@ const Styles = styled.article`
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid hsl(236, 33%, 92%);
+  padding: 0 1rem;
   div {
     display: flex;
     align-items: center;
@@ -18,11 +19,11 @@ const Styles = styled.article`
 
   input[type="checkbox"] {
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 50%;
-    border: 1px solid gray;
-    margin-right: 10px;
+    border: 1px solid hsl(236, 33%, 92%);
+    margin-right: 1rem;
     position: relative;
 
     &:checked {
