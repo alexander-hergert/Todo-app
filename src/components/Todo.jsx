@@ -7,7 +7,7 @@ import { useGlobalContext } from "../context";
 /**************** STYLES ******************/
 
 const Styles = styled.article`
-  transition: all 1s;
+  transition: background-color 1s;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,6 +26,7 @@ const Styles = styled.article`
   }
 
   input[type="checkbox"] {
+    transition: all 1s;
     appearance: none;
     width: 1.5rem;
     height: 1.5rem;
@@ -67,6 +68,7 @@ const Todo = ({ id, content, isCompleted }) => {
   const dispatch = useDispatch();
   const { isDarkMode } = useGlobalContext();
   const sectionRef = useRef();
+  const inputRef = useRef();
 
   const handleCheck = () => {
     dispatch(checkTodo(id));
@@ -80,8 +82,12 @@ const Todo = ({ id, content, isCompleted }) => {
   useEffect(() => {
     if (isDarkMode) {
       sectionRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
+      sectionRef.current.style.borderColor = "hsl(235, 19%, 35%)";
+      inputRef.current.style.borderColor = "hsl(235, 19%, 35%)";
     } else {
       sectionRef.current.style.backgroundColor = "white";
+      sectionRef.current.style.borderColor = "hsl(241, 7%, 89%)";
+      inputRef.current.style.borderColor = "hsl(241, 7%, 89%)";
     }
   }, [isDarkMode]);
 
@@ -94,6 +100,7 @@ const Todo = ({ id, content, isCompleted }) => {
           id={id}
           defaultChecked={isCompleted}
           onChange={handleCheck}
+          ref={inputRef}
         />
         <p>{content}</p>
       </div>

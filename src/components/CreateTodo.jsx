@@ -46,6 +46,7 @@ const CreateTodo = () => {
   const { isDarkMode } = useGlobalContext();
   const inputRef = useRef();
   const sectionRef = useRef();
+  const divRef = useRef();
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -63,17 +64,19 @@ const CreateTodo = () => {
       sectionRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
       inputRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
       inputRef.current.style.color = "white";
+      divRef.current.style.borderColor = "hsl(235, 19%, 35%)";
     } else {
       sectionRef.current.style.backgroundColor = "white";
       inputRef.current.style.backgroundColor = "white";
       inputRef.current.style.color = "black";
+      divRef.current.style.borderColor = "hsl(241, 7%, 89%)";
     }
   }, [isDarkMode]);
 
   return (
     <Styles ref={sectionRef}>
       <form action="" onSubmit={handleCreateTodo}>
-        <div></div>
+        <div ref={divRef}></div>
         <input
           type="text"
           name="newTodo"

@@ -10,7 +10,7 @@ import { useGlobalContext } from "../context";
 const Styles = styled.section`
   transition: all 1s;
   margin-bottom: 1rem;
-  border-radius: 7px;
+  border-radius: 10px;
   background-color: white;
 
   article:first-of-type {
@@ -24,7 +24,7 @@ const Styles = styled.section`
   }
 
   article {
-    transition: all 1s;
+    transition: background-color 1s;
     display: flex;
     background-color: white;
     justify-content: space-between;
