@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import Todo from "./Todo";
 import { useSelector, useDispatch } from "react-redux";
 import { getTodos, clearTodos } from "../slices/todosSlice";
+import { useGlobalContext } from "../context";
 
 /**************** STYLES ******************/
 
 const Styles = styled.section`
+  transition: all 1s;
   margin-bottom: 1rem;
-  border-radius: 5px;
+  border-radius: 7px;
   background-color: white;
 
   article:first-of-type {
@@ -22,6 +24,7 @@ const Styles = styled.section`
   }
 
   article {
+    transition: all 1s;
     display: flex;
     background-color: white;
     justify-content: space-between;
@@ -34,6 +37,7 @@ const Styles = styled.section`
 `;
 
 const Filters = styled.div`
+  transition: all 1s;
   display: flex;
   background-color: white;
   justify-content: center;
@@ -45,6 +49,9 @@ const Filters = styled.div`
 /**************** COMPONENT ******************/
 
 const Todos = () => {
+  const { isDarkMode } = useGlobalContext();
+  const sectionRef = useRef();
+  const articleRef = useRef();
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const [filterTherm, setFilterTherm] = useState("ALL");
@@ -103,18 +110,29 @@ const Todos = () => {
     setItemsLeft(counter);
   }, [todos]);
 
+  //DarkMode switch
+  useEffect(() => {
+    if (isDarkMode) {
+      sectionRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
+      articleRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
+    } else {
+      sectionRef.current.style.backgroundColor = "white";
+      articleRef.current.style.backgroundColor = "white";
+    }
+  }, [isDarkMode]);
+
   return (
     <>
       <Styles>
         {filteredTodos.map((todo) => (
           <Todo key={todo.id} {...todo} />
         ))}
-        <article className="items-left-clear">
+        <article className="items-left-clear" ref={articleRef}>
           <p>{itemsLeft} items left</p>
           <p onClick={handleClearCompleted}>Clear Completed</p>
         </article>
       </Styles>
-      <Filters>
+      <Filters ref={sectionRef}>
         <p onClick={handleFilterAll}>All</p>
         <p onClick={handleFilterActive}>Active</p>
         <p onClick={handleFilterCompleted}>Completed</p>

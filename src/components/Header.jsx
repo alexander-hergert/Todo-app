@@ -40,7 +40,7 @@ const Header = () => {
   useEffect(() => {
     if (isDarkMode) {
       document.body.style.backgroundColor = "hsl(235, 21%, 11%)";
-      //document.body.style.color = "white";
+      document.body.style.color = "white";
       //Depending on screenwidth
       if (windowWidth < mobileWidth) {
         backRef.current.style.background =
@@ -51,6 +51,7 @@ const Header = () => {
       }
     } else {
       document.body.style.backgroundColor = "hsl(233, 11%, 84%)";
+      document.body.style.color = "black";
       //Depending on screenwidth
       if (windowWidth < mobileWidth) {
         backRef.current.style.background =

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { checkTodo, removeTodo } from "../slices/todosSlice";
-
+import { useGlobalContext } from "../context";
 
 /**************** STYLES ******************/
 
@@ -12,11 +12,17 @@ const Styles = styled.article`
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  border-bottom: 1px solid hsl(236, 33%, 92%);
+  border-bottom: 1px solid hsl(236, 9%, 61%);
   padding: 0 1rem;
+
   div {
     display: flex;
     align-items: center;
+  }
+
+  input[type="checkbox"]:checked + p {
+    color: hsl(234, 11%, 52%);
+    text-decoration: line-through;
   }
 
   input[type="checkbox"] {
@@ -24,7 +30,7 @@ const Styles = styled.article`
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
-    border: 1px solid hsl(236, 33%, 92%);
+    border: 1px solid hsl(236, 9%, 61%);
     margin-right: 1rem;
     position: relative;
 
@@ -59,7 +65,8 @@ const Styles = styled.article`
 
 const Todo = ({ id, content, isCompleted }) => {
   const dispatch = useDispatch();
- 
+  const { isDarkMode } = useGlobalContext();
+  const sectionRef = useRef();
 
   const handleCheck = () => {
     dispatch(checkTodo(id));
@@ -69,9 +76,17 @@ const Todo = ({ id, content, isCompleted }) => {
     dispatch(removeTodo(id));
   };
 
+  //DarkMode switch
+  useEffect(() => {
+    if (isDarkMode) {
+      sectionRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
+    } else {
+      sectionRef.current.style.backgroundColor = "white";
+    }
+  }, [isDarkMode]);
 
   return (
-    <Styles>
+    <Styles ref={sectionRef}>
       <div>
         <input
           type="checkbox"

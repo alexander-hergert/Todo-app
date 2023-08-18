@@ -23,7 +23,7 @@ const Styles = styled.section`
       border-radius: 50%;
       width: 1.5rem;
       height: 1.5rem;
-      border: 1px solid hsl(236, 33%, 92%);
+      border: 1px solid hsl(236, 9%, 61%);
     }
 
     input {
