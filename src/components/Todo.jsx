@@ -3,9 +3,11 @@ import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { checkTodo, removeTodo } from "../slices/todosSlice";
 
+
 /**************** STYLES ******************/
 
 const Styles = styled.article`
+  transition: all 1s;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,6 +59,7 @@ const Styles = styled.article`
 
 const Todo = ({ id, content, isCompleted }) => {
   const dispatch = useDispatch();
+ 
 
   const handleCheck = () => {
     dispatch(checkTodo(id));
@@ -65,6 +68,7 @@ const Todo = ({ id, content, isCompleted }) => {
   const handleDelete = () => {
     dispatch(removeTodo(id));
   };
+
 
   return (
     <Styles>

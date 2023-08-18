@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../slices/todosSlice";
 import { nanoid } from "nanoid";
+import { useGlobalContext } from "../context";
 
 /**************** STYLES ******************/
 
 const Styles = styled.section`
+  transition: all 1s;
   background-color: white;
   margin-bottom: 1rem;
   padding: 0 1rem;
@@ -25,6 +27,7 @@ const Styles = styled.section`
     }
 
     input {
+      transition: background-color 1s;
       margin: 0.25rem 0;
       height: 3rem;
       width: 90%;
@@ -40,6 +43,9 @@ const Styles = styled.section`
 const CreateTodo = () => {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
+  const { isDarkMode } = useGlobalContext();
+  const inputRef = useRef();
+  const sectionRef = useRef();
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -51,8 +57,21 @@ const CreateTodo = () => {
     dispatch(addTodo(payload));
   };
 
+  //DarkMode switch
+  useEffect(() => {
+    if (isDarkMode) {
+      sectionRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
+      inputRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
+      inputRef.current.style.color = "white";
+    } else {
+      sectionRef.current.style.backgroundColor = "white";
+      inputRef.current.style.backgroundColor = "white";
+      inputRef.current.style.color = "black";
+    }
+  }, [isDarkMode]);
+
   return (
-    <Styles>
+    <Styles ref={sectionRef}>
       <form action="" onSubmit={handleCreateTodo}>
         <div></div>
         <input
@@ -61,6 +80,7 @@ const CreateTodo = () => {
           id="newTodo"
           placeholder="Create a new todo..."
           onChange={handleChange}
+          ref={inputRef}
         />
       </form>
     </Styles>

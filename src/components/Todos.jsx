@@ -39,6 +39,7 @@ const Filters = styled.div`
   justify-content: center;
   border-radius: 5px;
   gap: 1.5rem;
+  color: hsl(236, 9%, 61%);
 `;
 
 /**************** COMPONENT ******************/

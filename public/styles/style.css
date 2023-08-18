@@ -26,6 +26,7 @@ body {
   font-size: 18px;
   font-family: "Josefin Sans", sans-serif;
   background-color: hsl(233, 11%, 84%);
+  transition: background-color 1s;
 }
 
 footer {
