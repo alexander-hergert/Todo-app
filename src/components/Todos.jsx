@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { styled } from "styled-components";
 import Todo from "./Todo";
 import { useSelector, useDispatch } from "react-redux";
-import { getTodos, clearTodos } from "../slices/todosSlice";
+import { getTodos, clearTodos, updateTodos } from "../slices/todosSlice";
 import { useGlobalContext } from "../context";
 
 /**************** STYLES ******************/
@@ -58,6 +58,21 @@ const Todos = () => {
   const [filteredTodos, setFilteredTodos] = useState(todos);
   const [itemsLeft, setItemsLeft] = useState(0);
 
+  //Drag and Drop
+  const moveFilteredTodosItem = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragItem = filteredTodos[dragIndex];
+      const hoverItem = filteredTodos[hoverIndex];
+      // Swap places of dragItem and hoverItem in the filtered array
+      const updatedTodos = [...filteredTodos];
+      updatedTodos[dragIndex] = hoverItem;
+      updatedTodos[hoverIndex] = dragItem;
+      //sending whole array to update
+      dispatch(updateTodos(updatedTodos));
+    },
+    [filteredTodos]
+  );
+
   //store change
   const handleClearCompleted = () => {
     dispatch(clearTodos());
@@ -67,11 +82,9 @@ const Todos = () => {
   const handleFilterAll = () => {
     setFilterTherm("ALL");
   };
-
   const handleFilterActive = () => {
     setFilterTherm("ACTIVE");
   };
-
   const handleFilterCompleted = () => {
     setFilterTherm("COMPLETED");
   };
@@ -124,8 +137,13 @@ const Todos = () => {
   return (
     <>
       <Styles>
-        {filteredTodos.map((todo) => (
-          <Todo key={todo.id} {...todo} />
+        {filteredTodos.map((todo, index) => (
+          <Todo
+            key={todo.id}
+            {...todo}
+            index={index}
+            moveListItem={moveFilteredTodosItem}
+          />
         ))}
         <article className="items-left-clear" ref={articleRef}>
           <p>{itemsLeft} items left</p>

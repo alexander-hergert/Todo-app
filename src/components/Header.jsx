@@ -31,7 +31,6 @@ const Header = () => {
   const { isDarkMode, setIsDarkMode } = useGlobalContext();
   const backRef = useRef();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  console.log(windowWidth);
   const handleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };

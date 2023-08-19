@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import CreateTodo from "./components/CreateTodo";
 import Todos from "./components/Todos";
 import { AppProvider } from "./context.jsx";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const Main = styled.main`
   padding: 2rem;
@@ -18,11 +20,13 @@ function App() {
     <>
       <Provider store={store}>
         <AppProvider>
-          <Header />
-          <Main>
-            <CreateTodo />
-            <Todos />
-          </Main>
+          <DndProvider backend={HTML5Backend}>
+            <Header />
+            <Main>
+              <CreateTodo />
+              <Todos />
+            </Main>
+          </DndProvider>
         </AppProvider>
       </Provider>
     </>

@@ -27,10 +27,20 @@ const todosSlice = createSlice({
       state = action.payload;
       return state;
     },
+    updateTodos: (state, action) => {
+      state = action.payload;
+      return state;
+    },
   },
 });
 
-export const { addTodo, checkTodo, removeTodo, clearTodos, getTodos } =
-  todosSlice.actions;
+export const {
+  addTodo,
+  checkTodo,
+  removeTodo,
+  clearTodos,
+  getTodos,
+  updateTodos,
+} = todosSlice.actions;
 
 export default todosSlice;

@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { checkTodo, removeTodo } from "../slices/todosSlice";
 import { useGlobalContext } from "../context";
+import { useDrag, useDrop } from "react-dnd";
 
 /**************** STYLES ******************/
 
@@ -64,7 +65,7 @@ const Styles = styled.article`
 
 /**************** COMPONENT ******************/
 
-const Todo = ({ id, content, isCompleted }) => {
+const Todo = ({ id, content, isCompleted, index, moveListItem }) => {
   const dispatch = useDispatch();
   const { isDarkMode } = useGlobalContext();
   const sectionRef = useRef();
@@ -78,21 +79,54 @@ const Todo = ({ id, content, isCompleted }) => {
     dispatch(removeTodo(id));
   };
 
+  //Drag and Drop
+  // useDrag - the list item is draggable
+  const [{ isDragging }, dragRef] = useDrag({
+    type: "item",
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  // useDrop - the list item is also a drop area
+  const [spec, dropRef] = useDrop({
+    accept: "item",
+    hover: (item, monitor) => {
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top;
+      // if dragging down, continue only when hover is smaller than middle Y
+      if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return;
+      // if dragging up, continue only when hover is bigger than middle Y
+      if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return;
+      moveListItem(dragIndex, hoverIndex);
+      item.index = hoverIndex;
+    },
+  });
+
+  // Join the 2 refs together into one (both draggable and can be dropped on)
+  const ref = useRef(null);
+  const dragDropRef = dragRef(dropRef(ref));
+
   //DarkMode switch
   useEffect(() => {
     if (isDarkMode) {
-      sectionRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
-      sectionRef.current.style.borderColor = "hsl(235, 19%, 35%)";
+      dragDropRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
+      dragDropRef.current.style.borderColor = "hsl(235, 19%, 35%)";
       inputRef.current.style.borderColor = "hsl(235, 19%, 35%)";
     } else {
-      sectionRef.current.style.backgroundColor = "white";
-      sectionRef.current.style.borderColor = "hsl(241, 7%, 89%)";
+      dragDropRef.current.style.backgroundColor = "white";
+      dragDropRef.current.style.borderColor = "hsl(241, 7%, 89%)";
       inputRef.current.style.borderColor = "hsl(241, 7%, 89%)";
     }
   }, [isDarkMode]);
 
   return (
-    <Styles ref={sectionRef}>
+    <Styles ref={dragDropRef}>
       <div>
         <input
           type="checkbox"
