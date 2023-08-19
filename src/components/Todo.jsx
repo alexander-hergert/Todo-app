@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { checkTodo, removeTodo } from "../slices/todosSlice";
@@ -8,17 +8,24 @@ import { useDrag, useDrop } from "react-dnd";
 /**************** STYLES ******************/
 
 const Styles = styled.article`
+  --background: ${(props) => props.colors.background};
+  --border: ${(props) => props.colors.border};
   transition: background-color 1s;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
-  border-bottom: 1px solid hsl(236, 9%, 61%);
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
   padding: 0 1rem;
+  cursor: pointer;
 
   div {
     display: flex;
     align-items: center;
+  }
+
+  p {
+    cursor: pointer;
   }
 
   input[type="checkbox"]:checked + p {
@@ -27,14 +34,22 @@ const Styles = styled.article`
   }
 
   input[type="checkbox"] {
-    transition: all 1s;
     appearance: none;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
-    border: 1px solid hsl(236, 9%, 61%);
+    border: 1px solid var(--border);
     margin-right: 1rem;
     position: relative;
+    cursor: pointer;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+
+    &:hover {
+      border: double 1px transparent;
+      background-image: linear-gradient(var(--background), var(--background)),
+        linear-gradient(130deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    }
 
     &:checked {
       background: linear-gradient(
@@ -61,6 +76,16 @@ const Styles = styled.article`
   input[type="checkbox"]:checked::before {
     display: block;
   }
+
+  @media screen and (min-width: 800px) {
+    input[type="image"] {
+      display: none;
+    }
+
+    &:hover input[type="image"] {
+      display: block;
+    }
+  }
 `;
 
 /**************** COMPONENT ******************/
@@ -68,8 +93,6 @@ const Styles = styled.article`
 const Todo = ({ id, content, isCompleted, index, moveListItem }) => {
   const dispatch = useDispatch();
   const { isDarkMode } = useGlobalContext();
-  const sectionRef = useRef();
-  const inputRef = useRef();
 
   const handleCheck = () => {
     dispatch(checkTodo(id));
@@ -112,21 +135,15 @@ const Todo = ({ id, content, isCompleted, index, moveListItem }) => {
   const ref = useRef(null);
   const dragDropRef = dragRef(dropRef(ref));
 
-  //DarkMode switch
-  useEffect(() => {
-    if (isDarkMode) {
-      dragDropRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
-      dragDropRef.current.style.borderColor = "hsl(235, 19%, 35%)";
-      inputRef.current.style.borderColor = "hsl(235, 19%, 35%)";
-    } else {
-      dragDropRef.current.style.backgroundColor = "white";
-      dragDropRef.current.style.borderColor = "hsl(241, 7%, 89%)";
-      inputRef.current.style.borderColor = "hsl(241, 7%, 89%)";
-    }
-  }, [isDarkMode]);
-
   return (
-    <Styles ref={dragDropRef}>
+    <Styles
+      ref={dragDropRef}
+      colors={
+        isDarkMode
+          ? { background: "hsl(237, 14%, 26%)", border: "hsl(235, 19%, 35%)" }
+          : { background: "hsl(0deg 0% 100%)", border: "hsl(241, 7%, 89%)" }
+      }
+    >
       <div>
         <input
           type="checkbox"
@@ -134,7 +151,6 @@ const Todo = ({ id, content, isCompleted, index, moveListItem }) => {
           id={id}
           defaultChecked={isCompleted}
           onChange={handleCheck}
-          ref={inputRef}
         />
         <p>{content}</p>
       </div>

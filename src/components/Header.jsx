@@ -4,14 +4,19 @@ import { useGlobalContext } from "../context";
 /**************** STYLES ******************/
 
 const Styles = styled.header`
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
   height: 25vh;
   width: 100%;
   background: url("/images/bg-mobile-light.jpg") center/cover no-repeat;
   padding: 2rem;
   transition: all 1s;
+
+  div {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    max-width: 45rem;
+    margin: auto;
+  }
 
   h1 {
     color: white;
@@ -75,22 +80,24 @@ const Header = () => {
 
   return (
     <Styles ref={backRef}>
-      <h1>TODO</h1>
-      {!isDarkMode ? (
-        <input
-          type="image"
-          src="images/icon-moon.svg"
-          alt="icon-moon"
-          onClick={handleDarkMode}
-        />
-      ) : (
-        <input
-          type="image"
-          src="images/icon-sun.svg"
-          alt="icon-sun"
-          onClick={handleDarkMode}
-        />
-      )}
+      <div>
+        <h1>TODO</h1>
+        {!isDarkMode ? (
+          <input
+            type="image"
+            src="images/icon-moon.svg"
+            alt="icon-moon"
+            onClick={handleDarkMode}
+          />
+        ) : (
+          <input
+            type="image"
+            src="images/icon-sun.svg"
+            alt="icon-sun"
+            onClick={handleDarkMode}
+          />
+        )}
+      </div>
     </Styles>
   );
 };

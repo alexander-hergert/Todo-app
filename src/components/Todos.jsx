@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { styled } from "styled-components";
 import Todo from "./Todo";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,10 +8,12 @@ import { useGlobalContext } from "../context";
 /**************** STYLES ******************/
 
 const Styles = styled.section`
-  transition: all 1s;
-  margin-bottom: 1rem;
+  --background: ${(props) => props.colors.background};
+  --color: ${(props) => props.colors.color};
   border-radius: 10px;
-  background-color: white;
+  max-width: 45rem;
+  margin: auto;
+  margin-bottom: 1rem;
 
   article:first-of-type {
     border-top-right-radius: 5px;
@@ -21,12 +23,20 @@ const Styles = styled.section`
   article:last-of-type {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+
+    p:last-of-type {
+      cursor: pointer;
+    }
+
+    p:last-of-type:hover {
+      color: var(--color);
+    }
   }
 
   article {
     transition: background-color 1s;
+    background-color: var(--background);
     display: flex;
-    background-color: white;
     justify-content: space-between;
   }
 
@@ -37,21 +47,31 @@ const Styles = styled.section`
 `;
 
 const Filters = styled.div`
+  --background: ${(props) => props.colors.background};
+  --color: ${(props) => props.colors.color};
+  max-width: 45rem;
+  margin: auto;
   transition: all 1s;
   display: flex;
-  background-color: white;
+  background-color: var(--background);
   justify-content: center;
   border-radius: 5px;
   gap: 1.5rem;
   color: hsl(236, 9%, 61%);
+
+  p {
+    cursor: pointer;
+  }
+
+  p:hover {
+    color: var(--color);
+  }
 `;
 
 /**************** COMPONENT ******************/
 
 const Todos = () => {
   const { isDarkMode } = useGlobalContext();
-  const sectionRef = useRef();
-  const articleRef = useRef();
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const [filterTherm, setFilterTherm] = useState("ALL");
@@ -123,20 +143,15 @@ const Todos = () => {
     setItemsLeft(counter);
   }, [todos]);
 
-  //DarkMode switch
-  useEffect(() => {
-    if (isDarkMode) {
-      sectionRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
-      articleRef.current.style.backgroundColor = "hsl(237, 14%, 26%)";
-    } else {
-      sectionRef.current.style.backgroundColor = "white";
-      articleRef.current.style.backgroundColor = "white";
-    }
-  }, [isDarkMode]);
-
   return (
     <>
-      <Styles>
+      <Styles
+        colors={
+          isDarkMode
+            ? { background: "hsl(237, 14%, 26%)", color: "hsl(0deg 0% 100%)" }
+            : { background: "hsl(0deg 0% 100%)", color: "hsl(237, 14%, 26%)" }
+        }
+      >
         {filteredTodos.map((todo, index) => (
           <Todo
             key={todo.id}
@@ -145,12 +160,18 @@ const Todos = () => {
             moveListItem={moveFilteredTodosItem}
           />
         ))}
-        <article className="items-left-clear" ref={articleRef}>
+        <article className="items-left-clear">
           <p>{itemsLeft} items left</p>
           <p onClick={handleClearCompleted}>Clear Completed</p>
         </article>
       </Styles>
-      <Filters ref={sectionRef}>
+      <Filters
+        colors={
+          isDarkMode
+            ? { background: "hsl(237, 14%, 26%)", color: "hsl(0deg 0% 100%)" }
+            : { background: "hsl(0deg 0% 100%)", color: "hsl(237, 14%, 26%)" }
+        }
+      >
         <p onClick={handleFilterAll}>All</p>
         <p onClick={handleFilterActive}>Active</p>
         <p onClick={handleFilterCompleted}>Completed</p>
