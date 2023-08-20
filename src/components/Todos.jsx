@@ -68,6 +68,11 @@ const Filters = styled.div`
   }
 `;
 
+const Filter = styled.p`
+  --font: ${(props) => props.colors.font};
+  color: var(--font);
+`;
+
 /**************** COMPONENT ******************/
 
 const Todos = () => {
@@ -172,9 +177,36 @@ const Todos = () => {
             : { background: "hsl(0deg 0% 100%)", color: "hsl(237, 14%, 26%)" }
         }
       >
-        <p onClick={handleFilterAll}>All</p>
-        <p onClick={handleFilterActive}>Active</p>
-        <p onClick={handleFilterCompleted}>Completed</p>
+        <Filter
+          onClick={handleFilterAll}
+          colors={
+            filterTherm === "ALL"
+              ? { font: "hsl(220, 98%, 61%)" }
+              : { font: "hsl(236, 9%, 61%)" }
+          }
+        >
+          All
+        </Filter>
+        <Filter
+          colors={
+            filterTherm === "ACTIVE"
+              ? { font: "hsl(220, 98%, 61%)" }
+              : { font: "hsl(236, 9%, 61%)" }
+          }
+          onClick={handleFilterActive}
+        >
+          Active
+        </Filter>
+        <Filter
+          colors={
+            filterTherm === "COMPLETED"
+              ? { font: "hsl(220, 98%, 61%)" }
+              : { font: "hsl(236, 9%, 61%)" }
+          }
+          onClick={handleFilterCompleted}
+        >
+          Completed
+        </Filter>
       </Filters>
     </>
   );
