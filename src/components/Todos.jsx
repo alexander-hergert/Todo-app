@@ -10,10 +10,11 @@ import { useGlobalContext } from "../context";
 const Styles = styled.section`
   --background: ${(props) => props.colors.background};
   --color: ${(props) => props.colors.color};
+  --shadow: ${(props) => props.colors.shadow};
   border-radius: 10px;
   max-width: 40rem;
   margin: auto;
-  box-shadow: 0 5px 25px hsl(234, 11%, 52%);
+  box-shadow: var(--shadow);
 
   article:first-of-type {
     border-top-right-radius: 5px;
@@ -50,6 +51,7 @@ const Styles = styled.section`
 const Filters = styled.div`
   --background: ${(props) => props.colors.background};
   --color: ${(props) => props.colors.color};
+  --shadow: ${(props) => props.colors.shadow};
   z-index: 1;
   max-width: 40rem;
   margin: auto;
@@ -61,7 +63,7 @@ const Filters = styled.div`
   gap: 1.5rem;
   color: hsl(236, 9%, 61%);
   margin-top: 1.5rem;
-  box-shadow: 0 5px 25px hsl(234, 11%, 52%);
+  box-shadow: var(--shadow);
 
   p {
     cursor: pointer;
@@ -169,8 +171,16 @@ const Todos = () => {
       <Styles
         colors={
           isDarkMode
-            ? { background: "hsl(237, 14%, 26%)", color: "hsl(0deg 0% 100%)" }
-            : { background: "hsl(0deg 0% 100%)", color: "hsl(237, 14%, 26%)" }
+            ? {
+                background: "hsl(237, 14%, 26%)",
+                color: "hsl(0deg 0% 100%)",
+                shadow: "none",
+              }
+            : {
+                background: "hsl(0deg 0% 100%)",
+                color: "hsl(237, 14%, 26%)",
+                shadow: "0 5px 25px hsl(234, 11%, 52%)",
+              }
         }
       >
         {filteredTodos.map((todo, index) => (
@@ -191,8 +201,16 @@ const Todos = () => {
       <Filters
         colors={
           isDarkMode
-            ? { background: "hsl(237, 14%, 26%)", color: "hsl(0deg 0% 100%)" }
-            : { background: "hsl(0deg 0% 100%)", color: "hsl(237, 14%, 26%)" }
+            ? {
+                background: "hsl(237, 14%, 26%)",
+                color: "hsl(0deg 0% 100%)",
+                shadow: "none",
+              }
+            : {
+                background: "hsl(0deg 0% 100%)",
+                color: "hsl(237, 14%, 26%)",
+                shadow: "0 5px 25px hsl(234, 11%, 52%)",
+              }
         }
       >
         <Filter

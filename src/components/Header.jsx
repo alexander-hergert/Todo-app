@@ -39,7 +39,17 @@ const Header = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const handleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
+    //setLocalStorage
+    localStorage.setItem("isDarkMode", !isDarkMode);
   };
+
+  useEffect(() => {
+    //get data from localstorage
+    const storedIsDarkMode = localStorage.getItem("isDarkMode");
+    if (storedIsDarkMode !== null) {
+      setIsDarkMode(storedIsDarkMode === "true");
+    }
+  }, []);
 
   //DarkMode switch
   useEffect(() => {

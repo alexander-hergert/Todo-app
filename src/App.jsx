@@ -8,6 +8,7 @@ import Todos from "./components/Todos";
 import { AppProvider } from "./context.jsx";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { StyleSheetManager } from "styled-components";
 
 /***************** STYLES **********************/
 
@@ -25,11 +26,15 @@ function App() {
       <Provider store={store}>
         <AppProvider>
           <DndProvider backend={HTML5Backend}>
-            <Header />
-            <Main>
-              <CreateTodo />
-              <Todos />
-            </Main>
+            <StyleSheetManager
+              shouldForwardProp={(prop) => !prop.startsWith("colors")}
+            >
+              <Header />
+              <Main>
+                <CreateTodo />
+                <Todos />
+              </Main>
+            </StyleSheetManager>
           </DndProvider>
         </AppProvider>
       </Provider>
