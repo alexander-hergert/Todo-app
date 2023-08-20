@@ -16,7 +16,7 @@ const Styles = styled.article`
   justify-content: space-between;
   background-color: var(--background);
   border-bottom: 1px solid var(--border);
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   cursor: pointer;
 
   div {
@@ -26,6 +26,7 @@ const Styles = styled.article`
 
   p {
     cursor: pointer;
+    hyphens: auto;
   }
 
   input[type="checkbox"]:checked + p {
@@ -35,8 +36,8 @@ const Styles = styled.article`
 
   input[type="checkbox"] {
     appearance: none;
-    width: 1.5rem;
-    height: 1.5rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
     border-radius: 50%;
     border: 1px solid var(--border);
     margin-right: 1rem;
@@ -151,6 +152,7 @@ const Todo = ({ id, content, isCompleted, index, moveListItem }) => {
           id={id}
           defaultChecked={isCompleted}
           onChange={handleCheck}
+          aria-label="check this todo"
         />
         <p>{content}</p>
       </div>
@@ -159,6 +161,7 @@ const Todo = ({ id, content, isCompleted, index, moveListItem }) => {
         src="images/icon-cross.svg"
         alt="icon-delete"
         onClick={handleDelete}
+        aria-label="delete this todo"
       />
     </Styles>
   );

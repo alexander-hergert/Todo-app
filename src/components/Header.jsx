@@ -45,7 +45,7 @@ const Header = () => {
   useEffect(() => {
     if (isDarkMode) {
       document.body.style.backgroundColor = "hsl(235, 21%, 11%)";
-      document.body.style.color = "white";
+      document.body.style.color = "hsl(0 0% 100%)";
       //Depending on screenwidth
       if (windowWidth < mobileWidth) {
         backRef.current.style.background =
@@ -55,8 +55,8 @@ const Header = () => {
           'url("/images/bg-desktop-dark.jpg") center/cover no-repeat';
       }
     } else {
-      document.body.style.backgroundColor = "hsl(233, 11%, 84%)";
-      document.body.style.color = "black";
+      document.body.style.backgroundColor = "hsl(0 0% 98%)";
+      document.body.style.color = "hsl(237, 14%, 26%)";
       //Depending on screenwidth
       if (windowWidth < mobileWidth) {
         backRef.current.style.background =
@@ -89,6 +89,7 @@ const Header = () => {
             src="images/icon-moon.svg"
             alt="icon-moon"
             onClick={handleDarkMode}
+            aria-label="darkmode"
           />
         ) : (
           <input
@@ -96,6 +97,7 @@ const Header = () => {
             src="images/icon-sun.svg"
             alt="icon-sun"
             onClick={handleDarkMode}
+            aria-label="lightmode"
           />
         )}
       </div>

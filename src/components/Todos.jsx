@@ -13,6 +13,7 @@ const Styles = styled.section`
   border-radius: 10px;
   max-width: 40rem;
   margin: auto;
+  box-shadow: 0 5px 25px hsl(234, 11%, 52%);
 
   article:first-of-type {
     border-top-right-radius: 5px;
@@ -22,6 +23,7 @@ const Styles = styled.section`
   article:last-of-type {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    padding: 0 1.5rem;
 
     p:last-of-type {
       cursor: pointer;
@@ -51,14 +53,15 @@ const Filters = styled.div`
   z-index: 1;
   max-width: 40rem;
   margin: auto;
-  transition: all 1s;
+  transition: background-color 1s;
   display: flex;
   background-color: var(--background);
   justify-content: center;
   border-radius: 5px;
   gap: 1.5rem;
   color: hsl(236, 9%, 61%);
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 5px 25px hsl(234, 11%, 52%);
 
   p {
     cursor: pointer;
@@ -74,6 +77,7 @@ const Filters = styled.div`
     position: relative;
     width: 15rem;
     bottom: 3.5rem;
+    box-shadow: none;
     p {
       z-index: 10;
     }
@@ -179,7 +183,9 @@ const Todos = () => {
         ))}
         <article className="items-left-clear">
           <p>{itemsLeft} items left</p>
-          <p onClick={handleClearCompleted}>Clear Completed</p>
+          <p onClick={handleClearCompleted} role="button">
+            Clear Completed
+          </p>
         </article>
       </Styles>
       <Filters
@@ -196,6 +202,7 @@ const Todos = () => {
               ? { font: "hsl(220, 98%, 61%)" }
               : { font: "hsl(236, 9%, 61%)" }
           }
+          role="button"
         >
           All
         </Filter>
@@ -206,6 +213,7 @@ const Todos = () => {
               : { font: "hsl(236, 9%, 61%)" }
           }
           onClick={handleFilterActive}
+          role="button"
         >
           Active
         </Filter>
@@ -216,6 +224,7 @@ const Todos = () => {
               : { font: "hsl(236, 9%, 61%)" }
           }
           onClick={handleFilterCompleted}
+          role="button"
         >
           Completed
         </Filter>

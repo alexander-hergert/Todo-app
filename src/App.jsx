@@ -9,11 +9,15 @@ import { AppProvider } from "./context.jsx";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+/***************** STYLES **********************/
+
 const Main = styled.main`
   padding: 2rem;
   position: relative;
-  bottom: 8.5rem;
+  bottom: 9rem;
 `;
+
+/***************** COMPONENTS **********************/
 
 function App() {
   return (

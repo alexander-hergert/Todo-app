@@ -12,3 +12,5 @@ export const fetchTodo = createAsyncThunk("addTodo", async () => {
     //
   }
 });
+
+//Not used in this project but can be used to fetch dummy todos
