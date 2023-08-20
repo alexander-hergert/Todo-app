@@ -16,6 +16,10 @@ const Main = styled.main`
   padding: 2rem;
   position: relative;
   bottom: 9rem;
+
+  @media screen and (max-width: 400px) {
+    bottom: 7rem;
+  }
 `;
 
 /***************** COMPONENTS **********************/
