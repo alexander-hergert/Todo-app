@@ -11,9 +11,8 @@ const Styles = styled.section`
   --background: ${(props) => props.colors.background};
   --color: ${(props) => props.colors.color};
   border-radius: 10px;
-  max-width: 45rem;
+  max-width: 40rem;
   margin: auto;
-  margin-bottom: 1rem;
 
   article:first-of-type {
     border-top-right-radius: 5px;
@@ -49,7 +48,8 @@ const Styles = styled.section`
 const Filters = styled.div`
   --background: ${(props) => props.colors.background};
   --color: ${(props) => props.colors.color};
-  max-width: 45rem;
+  z-index: 1;
+  max-width: 40rem;
   margin: auto;
   transition: all 1s;
   display: flex;
@@ -58,6 +58,7 @@ const Filters = styled.div`
   border-radius: 5px;
   gap: 1.5rem;
   color: hsl(236, 9%, 61%);
+  margin-top: 1rem;
 
   p {
     cursor: pointer;
@@ -65,6 +66,17 @@ const Filters = styled.div`
 
   p:hover {
     color: var(--color);
+  }
+
+  @media screen and (min-width: 800px) {
+    margin-top: 0;
+    background-color: transparent;
+    position: relative;
+    width: 15rem;
+    bottom: 3.5rem;
+    p {
+      z-index: 10;
+    }
   }
 `;
 

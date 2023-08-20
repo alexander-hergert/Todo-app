@@ -14,7 +14,7 @@ const Styles = styled.section`
   background-color: var(--background);
   padding: 0 1rem;
   border-radius: 5px;
-  max-width: 45rem;
+  max-width: 40rem;
   margin: auto;
   margin-bottom: 1rem;
 

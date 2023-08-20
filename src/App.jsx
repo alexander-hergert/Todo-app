@@ -12,7 +12,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 const Main = styled.main`
   padding: 2rem;
   position: relative;
-  bottom: 8rem;
+  bottom: 8.5rem;
 `;
 
 function App() {
